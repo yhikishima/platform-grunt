@@ -1,0 +1,8 @@
+/*
+ * container
+ */
+
+.container {
+  @include pie-clearfix();
+  min-width: 980px;
+}

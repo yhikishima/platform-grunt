@@ -1,0 +1,32 @@
+{
+  "repository": {},
+  "devDependencies": {
+    "assemble": "0.4.37",
+    "assemble-handlebars": "https://github.com/shootaroo/assemble-handlebars/tarball/9649c41",
+    "grunt": "0.4.4",
+    "grunt-autoprefixer": "0.7.2",
+    "grunt-contrib-clean": "0.5.0",
+    "grunt-contrib-connect": "0.7.1",
+    "grunt-contrib-copy": "0.5.0",
+    "grunt-contrib-csslint": "https://github.com/shootaroo/grunt-contrib-csslint/tarball/d6ce52a",
+    "grunt-contrib-compress": "0.8.0",
+    "grunt-contrib-htmlmin": "0.2.0",
+    "grunt-contrib-jshint": "0.10.0",
+    "grunt-contrib-less": "0.11.0",
+    "grunt-contrib-uglify": "0.4.0",
+    "grunt-contrib-watch": "0.6.1",
+    "grunt-htmlhint": "https://github.com/shootaroo/grunt-htmlhint/tarball/3ca2ded",
+    "grunt-jscs-checker": "0.4.1",
+    "grunt-newer": "0.7.0",
+    "grunt-prettify": "0.3.4",
+    "grunt-spritesmith": "1.24.0",
+    "grunt-string-replace": "0.2.7",
+    "grunt-wget": "0.1.2",
+    "jit-grunt": "0.4.0",
+    "time-grunt": "0.2.10",
+    "grunt-contrib-compass": "0.7.2",
+    "uglify-save-license": "0.4.0",
+    "grunt-contrib-concat": "",
+    "grunt-ftp-deploy": "^0.1.3"
+  }
+}

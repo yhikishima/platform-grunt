@@ -1,0 +1,13 @@
+/*
+ * footer
+ */
+
+.footer {
+  background-color: #ccc;
+
+  .footer-in {
+    @include pie-clearfix();
+    width: 980px;
+    margin: 0 auto;
+  }
+}

@@ -1,0 +1,13 @@
+/*
+ * header
+ */
+.header {
+  background: #ccc;
+
+  .header-in {
+    @include pie-clearfix();
+    margin: 0 auto;
+    height: 85px;
+    line-height: 85px;
+  }
+}
