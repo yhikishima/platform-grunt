@@ -1,0 +1,313 @@
+<!DOCTYPE  html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>doc</title>
+    <style>
+      /*github.com style (c) Vasily Polovnyov <vast@whiteants.net>*/
+      pre code {
+        display: block; padding: 0.5em;
+        color: #333;
+        background: #f8f8ff
+      }
+      pre .comment,
+      pre .template_comment,
+      pre .diff .header,
+      pre .javadoc {
+        color: #998;
+        font-style: italic
+      }
+      pre .keyword,
+      pre .css .rule .keyword,
+      pre .winutils,
+      pre .javascript .title,
+      pre .nginx .title,
+      pre .subst,
+      pre .request,
+      pre .status {
+        color: #333;
+        font-weight: bold
+      }
+      pre .number,
+      pre .hexcolor,
+      pre .ruby .constant {
+        color: #099;
+      }
+      pre .string,
+      pre .tag .value,
+      pre .phpdoc,
+      pre .tex .formula {
+        color: #d14
+      }
+      pre .title,
+      pre .id {
+        color: #900;
+        font-weight: bold
+      }
+      pre .javascript .title,
+      pre .lisp .title,
+      pre .clojure .title,
+      pre .subst {
+        font-weight: normal
+      }
+      pre .class .title,
+      pre .haskell .type,
+      pre .vhdl .literal,
+      pre .tex .command {
+        color: #458;
+        font-weight: bold
+      }
+      pre .tag,
+      pre .tag .title,
+      pre .rules .property,
+      pre .django .tag .keyword {
+        color: #000080;
+        font-weight: normal
+      }
+      pre .attribute,
+      pre .variable,
+      pre .lisp .body {
+        color: #008080
+      }
+      pre .regexp {
+        color: #009926
+      }
+      pre .class {
+        color: #458;
+        font-weight: bold
+      }
+      pre .symbol,
+      pre .ruby .symbol .string,
+      pre .lisp .keyword,
+      pre .tex .special,
+      pre .prompt {
+        color: #990073
+      }
+      pre .built_in,
+      pre .lisp .title,
+      pre .clojure .built_in {
+        color: #0086b3
+      }
+      pre .preprocessor,
+      pre .pi,
+      pre .doctype,
+      pre .shebang,
+      pre .cdata {
+        color: #999;
+        font-weight: bold
+      }
+      pre .deletion {
+        background: #fdd
+      }
+      pre .addition {
+        background: #dfd
+      }
+      pre .diff .change {
+        background: #0086b3
+      }
+      pre .chunk {
+        color: #aaa
+      }
+    </style>
+  </head>
+  <body>  
+    <!-- <link href="https://raw.github.com/simonlc/Markdown-CSS/master/markdown.css" rel="stylesheet"> -->
+
+<style>
+body {
+  font-size: 0.9em;
+}
+</style>
+
+<h1 id="spf-">SPFコーディング規約</h1>
+<p>SPFのコーディング規約をまとめたページになります。</p>
+<h2 id="-">基本的なところ</h2>
+<p>smacssとBEMを参考にしたコーディング規約</p>
+<h2 id="html-">HTMLコーディング</h2>
+<h3 id="html5">html5</h3>
+<p>HTMLのコーディングはHTML5のDOCTYPE準拠のタグを利用します。</p>
+<pre><code>&lt;!DOCTYPE html&gt;</code></pre>
+<h2 id="css-">cssコーディング</h2>
+<h3 id="scss">scss</h3>
+<p>柔軟性を重視し、CSSの記法はSCSSを採用します。</p>
+<h3 id="-">基本スタイル</h3>
+<h4 id="-">リセット</h4>
+<p>基本のリセットスタイルにはnormalize.cssを利用します。</p>
+<h4 id="compass">compass</h4>
+<p>CSS3のベンダープレフィックスについては、Compassを利用。</p>
+<h4 id="-">ベース、モジュールとレイアウト</h4>
+<p>モジュールとレイアウトの概念はSMACSSを参考にしています。詳しくはSMACSSのドキュメントを参照してください。
+モジュールとレイアウトに構造を分けることで、CSSクラスの再利用性を高めます。
+基本的に、再利用できるような部品としてモジュールにまとめた上で、ページ上の位置指定などをレイアウトを使って行います。</p>
+<h4 id="-">セレクタ定義とモジュール化</h4>
+<p>それぞれのモジュールの平等性を高めるため、CSSのセレクタにはIDは利用せず、必ずクラスを使うことにします。同様の理由で多重の入れ子構造も利用しません。</p>
+<p>BAD</p>
+<pre><code>#what-a-strong-selector {
+  ...
+}</code></pre>
+<p>BAD</p>
+<pre><code>.wrapper {
+  .wrapper-inner {
+    .module {
+      .module-inner {
+        ...
+      }
+    }
+  }
+}</code></pre>
+<h4 id="-">ファイル構造</h4>
+<p>CSSのファイル構造は以下のようにします。
+ベース、モジュール（ui）とレイアウトをそれぞれフォルダに分け、モジュール、レイアウトそれぞれの名前でSCSSファイルを作成してください。
+mixinは「function」にまとめて書き、uiやlayoutから読み出してください。</p>
+<p>また、変数は_settings.scssにまとめて記述します。</p>
+<pre><code>.
+├── README.md
+├── _settings.scss
+├── app.scss
+├── base
+│   ├── _main.scss
+│   └── _util.scss
+├── layout
+│   ├── _chat.scss
+│   ├── _contacts.scss
+│   ├── _footer.scss
+│   ├── _navbar.scss
+│   └── _signin.scss
+└── module
+    ├── _chat.scss
+    ├── _contacts.scss
+    ├── _dropdown.scss
+    ├── _footer.scss
+    ├── _modal.scss
+    ├── _navbar.scss
+    └── _signin.scss</code></pre>
+<h3 id="-">インデント</h3>
+<p>・スペース2個で</p>
+<h3 id="-">ファイル構造</h3>
+<h3 id="-">ドキュメントとコメントアウト</h3>
+<p>CSSのドキュメントはStyleDoccoを利用して作成されています。
+ドキュメント化しないコメントアウトは先頭に半角スペースを入れてください。</p>
+<h1 id="sass-css-">SASSを使ったCSSのコーディングルール</h1>
+<h2 id="-">インデント</h2>
+<ul>
+<li>ソフトインデントで2個</li>
+</ul>
+<h2 id="-">コロンの位置とかっこの位置</h2>
+<ul>
+<li>下記を参照</li>
+</ul>
+<pre><code class="lang-scss">.link {
+  color: #fff;
+}
+
+.hoge,
+.nanika {
+  text-decoration: underline;
+}
+
+/*
+クラス名の後の{は半角スペースを空ける
+コロンの後は半角スペースを空ける
+クラス間は1行空ける
+複数クラスの指定はカンマの後に改行を入れる
+*/</code></pre>
+<h2 id="-">入れ子</h2>
+<ul>
+<li>下記を参照</li>
+</ul>
+<pre><code class="lang-scss">.link {
+  color: #fff;
+
+  .text {
+    //とりあえずコメントしてみる
+    text-decoration: underline;
+  }
+}
+
+/*
+入れ子の中にコメントは適宜書いてよい
+*/</code></pre>
+<h2 id="-">命名規則</h2>
+<h3 id="-">クラス名の命名規則</h3>
+<ul>
+<li>クラス名はロワーキャメルケースを使う</li>
+<li>レイアウトを明示する時は<code>ly</code>プレフィックスを付ける -&gt;SMACSSに沿う</li>
+</ul>
+<pre><code class="lang-scss">
+.lyWrapper {
+ margin: 0 auto;
+}</code></pre>
+<ul>
+<li>状態を明示する時は<code>is-*</code>、<code>has-*</code>、<code>type-*</code>など、ハイフンケースを使ったサブクラスを定義する -&gt;SMACSSに沿う</li>
+</ul>
+<pre><code class="lang-scss">
+.headingLv1 {
+ margin: 0 auto;
+ &amp;.has-button {
+   @include pie-clearfix();
+ }
+}</code></pre>
+<ul>
+<li>モジュールを明示する時は何もプレフィックスをつけない -&gt;SMACSSに沿う</li>
+</ul>
+<pre><code class="lang-scss">
+.btn {
+  border: solid 1px #ccc;
+  @include border-radius(5px);
+}</code></pre>
+<ul>
+<li>　レイアウトの中のモジュールを命名する必要がある時はBEMに沿って名前を付ける</li>
+</ul>
+<pre><code class="lang-scss">
+.lyWrapper {
+  .lyHogeBlock {
+    .lyWrapper--lyHogeBlock__btn {
+      border-color: #eee;
+    }
+  }
+}
+
+.lyHugaBlock {
+  .lyHugaBlock__btn {
+    border-color: #ccc;
+  }
+}</code></pre>
+<pre><code class="lang-scss">
+こちらを採用！
+
+.lyWrapper {
+  margin: 0 auto;
+}
+
+.lyHogeBlock {
+  width: 960px;
+}
+.lyHogeBlock__btn {
+  border-color: #eee;
+}</code></pre>
+<h3 id="-">変数の命名規則</h3>
+<ul>
+<li>変数の名前はロワーキャメルケースを使う</li>
+<li>ダブルクォーテーションを使う</li>
+<li>値が見やすいようにカテゴリごとにインデントを整理する</li>
+</ul>
+<pre><code class="lang-scss">
+/* 状態色の定義 */
+$alertColor        : &quot;#ddd&quot;;
+$notificationColor : &quot;#eee&quot;;
+
+/* 背景色の定義 */
+$bgMainColor : &#39;#ccc&#39;;
+$bgSubColor  : &#39;bbb&#39;;</code></pre>
+<h3 id="mixin-">Mixinの命名規則</h3>
+<ul>
+<li>Mixinの名前はロワーキャメルケースを使う</li>
+</ul>
+<pre><code class="lang-scss">
+@mixin createButton ( $buttonWidth ) {
+  width: #{$buttonWidth}px;
+}</code></pre>
+
+  </body>
+</html>

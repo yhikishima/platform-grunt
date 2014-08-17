@@ -1,8 +1,19 @@
 /*
- * container
- */
+#container
 
-.container {
+containerはhogehoge
+
+
+```
+<div class="lyContainer">
+  {{> header-top }}
+  {{> body}}
+</div>
+```
+*/
+
+.lyContainer {
   @include pie-clearfix();
   min-width: 980px;
 }
+

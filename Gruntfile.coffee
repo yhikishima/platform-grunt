@@ -156,6 +156,38 @@ module.exports = (grunt) ->
           '!<%= path.tmp %>/css/bootstrap.css'
         ]
 
+  # cssからモジュール一覧を作成
+    styleguide:
+      styledocco:
+        options:
+          name: 'test style'
+          framework:
+            name: 'styledocco'
+            options:
+              preprocessor: 'scss'
+          template:
+            include: ['plugin.css', 'app.js']
+        src: ['<%= path.src %>/scss/**/*.scss']
+        dest: '<%= path.src %>/docs'
+
+  # kss
+    kss:
+      options:
+        includeType: 'css'
+      dist:
+        files:
+          '<%= path.tmp %>/docs': ['<%= path.src %>/scss/']
+
+  # マークダウン
+    markdown:
+      dist:
+        expand: true
+        src: [
+          '<%= path.src %>/md/*.md'
+        ]
+        dest: ''
+        ext: '.html'
+
   # JS静的構文チェック
     jshint:
       options:
@@ -296,7 +328,7 @@ module.exports = (grunt) ->
         tasks: ['newer:assemble']
       css:
         files: ['<%= path.src %>/**/*.scss']
-        tasks: ['compass']
+        tasks: ['compass', 'styleguide']
       concat:
         files: ['<%= path.src %>/js/common/*.js']
         tasks: ['concat']
@@ -311,6 +343,9 @@ module.exports = (grunt) ->
       ts:
         files: ['<%= path.src %>/ts/**/*.ts']
         tasks: ['newer:typescript']
+      md:
+        files: ['<%= path.src %>/md/**/*.md']
+        tasks: ['newer:markdown']
 
   # タスク定義
   grunt.registerTask 'pre-build', ['sprite']
@@ -322,11 +357,14 @@ module.exports = (grunt) ->
   # server タスク
   grunt.registerTask 'server', [
     'build'
+    'styleguide'
+    'markdown'
+    # 'kss'
     'concat'
     'copy:server'
     'optimize'
     'connect:livereload'
-    'lint:prod'
+    # 'lint:prod'
     'watch'
   ]
 

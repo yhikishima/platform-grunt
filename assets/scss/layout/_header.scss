@@ -1,8 +1,16 @@
 /*
- * header
- */
+
+```
+<header class="header">
+  <div class="header-in">
+    ヘッダー
+  </div>
+</header>
+```
+*/
+
 .header {
-  background: #ccc;
+  background: #CCC;
 
   .header-in {
     @include pie-clearfix();
